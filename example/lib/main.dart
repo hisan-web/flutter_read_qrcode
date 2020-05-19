@@ -16,11 +16,16 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    initPlatformState();
+    init();
   }
 
-  // Platform messages are asynchronous, so we initialize in an async method.
-  Future<void> initPlatformState() async {
+  @override
+  void dispose() {
+    unInit();
+    super.dispose();
+  }
+
+  Future<void> init() async {
     bool result = await Readqrcode.init();
     if (result) {
       print("init success");
@@ -28,6 +33,10 @@ class _MyAppState extends State<MyApp> {
         print(data);
       });
     }
+  }
+
+  Future<void> unInit() async {
+    await Readqrcode.unInit();
   }
 
   @override
