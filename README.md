@@ -6,7 +6,7 @@
 ```
 readqrcode:
     git:
-        git@github.com:hisan-web/flutter_read_qrcode.git
+        https://github.com/hisan-web/flutter_read_qrcode
 ```
 
 
