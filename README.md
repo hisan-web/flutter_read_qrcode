@@ -1,14 +1,17 @@
 # 这是一个flutter实现串口二维码阅读器读取数据的插件
 
 ## 使用方法
+
 ### 加载依赖
-'''
+```
 readqrcode:
     git:
         git@github.com:hisan-web/flutter_read_qrcode.git
-'''
+```
+
+
 ### 使用demo
-'''
+```
 import 'package:flutter/material.dart';
 import 'dart:async';
 
@@ -55,4 +58,4 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
-'''
+```
