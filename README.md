@@ -1,14 +1,58 @@
-# readqrcode
+# 这是一个flutter实现串口二维码阅读器读取数据的插件
 
-flutter_read_qrcode
+## 使用方法
+### 加载依赖
+'''
+readqrcode:
+    git:
+        git@github.com:hisan-web/flutter_read_qrcode.git
+'''
+### 使用demo
+'''
+import 'package:flutter/material.dart';
+import 'dart:async';
 
-## Getting Started
+import 'package:readqrcode/readqrcode.dart';
 
-This project is a starting point for a Flutter
-[plug-in package](https://flutter.dev/developing-packages/),
-a specialized package that includes platform-specific implementation code for
-Android and/or iOS.
+void main() => runApp(MyApp());
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.dev/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  String _platformVersion = 'Unknown';
+
+  @override
+  void initState() {
+    super.initState();
+    initPlatformState();
+  }
+
+  // Platform messages are asynchronous, so we initialize in an async method.
+  Future<void> initPlatformState() async {
+    bool result = await Readqrcode.init();
+    if (result) {
+      print("init success");
+      Readqrcode.dataStreamListen((data) {
+        print(data);
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Plugin example app'),
+        ),
+        body: Center(
+          child: Text('Running on: $_platformVersion\n'),
+        ),
+      ),
+    );
+  }
+}
+'''
