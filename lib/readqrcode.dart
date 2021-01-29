@@ -13,9 +13,9 @@ class Readqrcode {
     }, onError: error);
   }
 
-  static Future<bool> init() async {
+  static Future<bool> init(String path) async {
     try {
-      await _channel.invokeMethod('init');
+      await _channel.invokeMethod('init',{'path': path});
       return true;
     } catch(e) {
       print(e.toString());

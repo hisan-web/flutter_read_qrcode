@@ -47,7 +47,8 @@ public class ReadqrcodePlugin implements FlutterPlugin, MethodCallHandler{
   public void onMethodCall(@NonNull MethodCall call, @NonNull Result result) {
     switch (call.method) {
       case "init":
-        serialPortHandler(result);
+        String path = call.argument("path");
+        serialPortHandler(path, result);
         break;
       case "unInit":
         pluginDestroy();
@@ -76,10 +77,10 @@ public class ReadqrcodePlugin implements FlutterPlugin, MethodCallHandler{
    * 处理串口
    * @param result
    */
-  private void serialPortHandler(Result result) {
+  private void serialPortHandler(String path, Result result) {
     // 窗口配置
     SerialPortConfig serialPortConfig = new SerialPortConfig();
-    serialPortConfig.path = "dev/ttyS3";
+    serialPortConfig.path = (path == null) ? "dev/ttyS3" : path;
     // 初始化串口
     serialPortHelper = new SerialPortHelper(32, false);
     // 设置串口参数
